@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+{% load widget_tweaks %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Forced Choice Items</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="{% static 'theme/logo.png' %}">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <nav class="bg-white shadow p-4 mb-6 flex justify-between">
+    <div class="flex items-center">
+        {% if user.is_authenticated %}
+            <a href="{% url 'dashboard_home' %}" class="flex items-center">
+        {% else %}
+            <a href="{% url 'public_home' %}" class="flex items-center">
+        {% endif %}
+                <img src="{% static 'theme/logo.png' %}" alt="LingJudge Logo" class="h-5 w-5 inline-block align-middle mr-2" width="30" height="30">
+                <h1 class="text-xl font-bold">LingJudge</h1>
+            </a>
+    </div>
+    <div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'dashboard_home' %}" class="mr-4">Dashboard</a>
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="text-blue-600 underline">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="mr-4">Login</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </div>
+  </nav>
+
+<div class="flex justify-center">
+  <div class="w-full max-w-2xl bg-white rounded-lg shadow-lg p-8 mt-8 mb-8">
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="bg-red-100 text-red-800 px-4 py-2 rounded mb-4">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <h2 class="text-2xl font-bold text-center text-gray-900 mb-6">Add Forced Choice Items to <span class="text-blue-700">{{ task.title }}</span></h2>
+    <p>Choose how to upload your items. LingJudge supports both automatic upload of a CSV file or manual submission of each item.</p>
+
+    <div style="height: 20px;"></div>
+
+    <!-- CSV Upload Info -->
+    <div class="mb-6">
+      <p class="text-sm text-gray-600 mb-2 font-medium">CSV format: <code class="bg-gray-100 px-1 py-0.5 rounded">sentence_a, sentence_b, context</code></p>
+      <p class="text-sm text-gray-500 mb-2">Example: <code class="bg-gray-100 px-1 py-0.5 rounded">"The cat sleeps.","The dog sleeps.","In the living room."</code></p>
+    </div>
+
+    <!-- CSV Upload -->
+    <form method="POST" enctype="multipart/form-data" class="mb-6 bg-gray-50 p-4 rounded shadow-sm border border-gray-200">
+      {% csrf_token %}
+      {{ csv_form.as_p }}
+      <div style="height: 20px;"></div>
+      <button type="submit" name="upload_csv" value="1" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold transition">Upload CSV</button>
+    </form>
+
+    <div class="flex items-center my-6">
+      <div class="flex-grow border-t border-gray-300"></div>
+      <span class="mx-4 text-gray-500 font-medium">or enter each item manually</span>
+      <div class="flex-grow border-t border-gray-300"></div>
+    </div>
+
+    <!-- Manual Entry Formset -->
+<form method="POST" class="space-y-4">
+  {% csrf_token %}
+  {{ formset.management_form }}
+  <div class="space-y-4">
+    {% for form in formset %}
+      <div class="bg-gray-50 p-4 rounded border border-gray-200 space-y-4">
+        {% for field in form.visible_fields %}
+          <div>
+            <label class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+            {{ field|add_class:"border border-gray-300 rounded px-3 py-2 w-full" }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+  <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-semibold transition mt-4">Submit Items</button>
+</form>
+
+  </div>
+</div>
+</body>
+</html>

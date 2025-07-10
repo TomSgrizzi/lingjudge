@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="max-w-xl mx-auto bg-white p-6 shadow rounded mt-10">
+    <h2 class="text-2xl font-semibold text-red-600 mb-4">Delete Task</h2>
+    
+    <p class="text-gray-800">
+      Are you sure you want to permanently delete the task:
+      <strong class="text-black">"{{ task.title }}"</strong>?
+    </p>
+
+    <p class="text-red-600 font-medium mt-2">
+      ⚠ This action is <strong>not reversible</strong>. All task items and responses will be lost.
+    </p>
+
+    <form method="POST" class="mt-6">
+      {% csrf_token %}
+      <div class="flex justify-start space-x-4">
+        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow">
+          Yes, delete it
+        </button>
+        <a href="{% url 'my_results' %}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded shadow">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

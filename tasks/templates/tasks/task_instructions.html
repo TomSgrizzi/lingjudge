@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-50 py-12">
+  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-bold text-center text-gray-900 mb-4">{{ task.title }}</h2>
+    <p class="my-4 text-gray-700 text-center">{{ task.instructions }}</p>
+    <div class="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 p-4 rounded mb-6 text-center">
+      <strong class="font-semibold">Warning:</strong> If you leave the task now, your progress will not be saved.
+    </div>
+    <div class="flex justify-center">
+      {% if task.task_type == 'Likert' %}
+        <a href="{% url 'tasks:do_likert_task' task.id 0 %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-base font-semibold px-6 py-3 rounded shadow transition mt-4">Start Task</a>
+      {% else %}
+        <a href="{% url 'tasks:do_fc_task' task.id 0 %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-base font-semibold px-6 py-3 rounded shadow transition mt-4">Start Task</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

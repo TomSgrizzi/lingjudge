@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-6xl mx-auto py-16 px-6">
+  <!-- Welcome Message -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">Welcome, {{ user.username }}!</h1>
+    <p class="mt-4 text-lg text-gray-500">Manage your tasks, profile, and results.</p>
+  </div>
+  <div style="height: 40px;"></div>
+  <!-- Action Grid -->
+  <div class="flex justify-center">
+    <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-[960px] place-items-center justify-items-center">
+      <!-- Create Task -->
+      <a href="{% url 'tasks:create_task' %}" class="max-w-xs aspect-square p-6 rounded-lg border border-gray-200 shadow hover:shadow-lg transition bg-white hover:bg-blue-50 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-semibold text-blue-600 flex items-center gap-2">➕ Create New Task</h3>
+          <p class="mt-3 text-gray-600 text-sm">Design and launch a new Likert or Forced Choice task.</p>
+        </div>
+      </a>
+      <div style="height: 20px;"></div>
+      <!-- Task Feed -->
+      <a href="{% url 'tasks:task_feed' %}" class="max-w-xs aspect-square p-6 rounded-lg border border-gray-200 shadow hover:shadow-lg transition bg-white hover:bg-blue-50 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-semibold text-blue-600 flex items-center gap-2">📄 View Task Feed</h3>
+          <p class="mt-3 text-gray-600 text-sm">Browse and participate in available linguistic tasks.</p>
+        </div>
+      </a>
+      <div style="height: 20px;"></div>
+      <!-- My Results -->
+      <a href="{% url 'my_results' %}" class="max-w-xs aspect-square p-6 rounded-lg border border-gray-200 shadow hover:shadow-lg transition bg-white hover:bg-blue-50 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-semibold text-blue-600 flex items-center gap-2">📊 View My Results</h3>
+          <p class="mt-3 text-gray-600 text-sm">See your completed task history and download results.</p>
+        </div>
+      </a>
+      <div style="height: 20px;"></div>
+      <!-- Edit Profile -->
+      <a href="{% url 'edit_profile' %}" class="max-w-xs aspect-square p-6 rounded-lg border border-gray-200 shadow hover:shadow-lg transition bg-white hover:bg-blue-50 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-semibold text-blue-600 flex items-center gap-2">⚙️ Edit Profile</h3>
+          <p class="mt-3 text-gray-600 text-sm">Update your username, affiliation, and review your data.</p>
+        </div>
+      </a>
+      <div style="height: 20px;"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

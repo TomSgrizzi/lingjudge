@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="flex justify-center items-center min-h-[70vh] px-4">
+  <div class="flex justify-center w-full">
+    <div class="max-w-lg bg-white rounded-xl shadow-md p-8">
+      <h2 class="text-2xl font-bold text-center mb-8">Edit Profile</h2>
+      <div style="height: 35px;"></div>
+
+      <!-- MAIN EDIT PROFILE FORM -->
+      <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- Username (editable) -->
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">{{ form.username.label }}</label>
+          {{ form.username|add_class:'w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-200' }}
+        </div>
+        <div style="height: 20px;"></div>
+
+        <!-- Affiliation (editable) -->
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">{{ form.affiliation.label }}</label>
+          {{ form.affiliation|add_class:'w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-200' }}
+        </div>
+        <div style="height: 20px;"></div>
+
+        <!-- Email (read-only) -->
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">Email:</label>
+          <div class="text-gray-400 bg-gray-100 rounded px-3 py-2">{{ request.user.email }}</div>
+        </div>
+        <div style="height: 20px;"></div>
+
+        <!-- Date of Birth (read-only) -->
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">Date of Birth:</label>
+          <div class="text-gray-400 bg-gray-100 rounded px-3 py-2">{{ request.user.date_of_birth }}</div>
+        </div>
+        <div style="height: 20px;"></div>
+
+        <!-- Native Languages (read-only) -->
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">Native Language(s):</label>
+          <ul class="text-gray-400 bg-gray-100 rounded px-3 py-2">
+            {% for lang in request.user.native_languages.all %}
+              <li>{{ lang.name }}</li>
+            {% empty %}
+              <li>No languages listed.</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div style="height: 20px;"></div>
+
+        <div class="space-y-4">
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition">Save Changes</button>
+          <a href="{% url 'password_change' %}" class="w-full block text-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded transition">Change Password</a>
+        </div>
+      </form>
+
+      <!-- DELETE ACCOUNT FORM SEPARATE -->
+      <form method="post" action="{% url 'delete_account' %}" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');" class="mt-6 w-full">
+        {% csrf_token %}
+        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition">Delete My Account</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-7xl mx-auto">
+  <!-- Hero Section -->
+  <div class="text-center py-12">
+    <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl">
+      Welcome to LingJudge
+    </h1>
+    <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+      A platform for collecting linguistic acceptability judgments from native speakers. Connect researchers with contributors to advance linguistic research, for free.
+    </p>
+    <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+      <div class="rounded-md shadow">
+        <a href="{% url 'signup' %}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
+          Get Started
+        </a>
+      </div>
+      <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+        <a href="{% url 'login' %}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
+          Log In
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:text-center">
+        <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Features</h2>
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Everything you need for linguistic research
+        </p>
+      </div>
+      <div class="mt-10">
+        <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <!-- For Researchers -->
+          <div class="relative">
+            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+            </div>
+            <div class="ml-16">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">For Researchers</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Submit judgment tasks, manage responses, and export your data. Perfect for linguistic research and experiments.
+              </p>
+            </div>
+          </div>
+          <!-- For Contributors -->
+          <div class="relative">
+            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <div class="ml-16">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">For Contributors</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Participate in linguistic research by providing judgments on sentences in your native language(s).
+              </p>
+            </div>
+          </div>
+          <!-- Multiple Judgment Types -->
+          <div class="relative">
+            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="ml-16">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">Multiple Judgment Types</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Support for Likert scale tasks and Forced choice tasks.
+              </p>
+            </div>
+          </div>
+          <!-- Language Matching -->
+          <div class="relative">
+            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+              </svg>
+            </div>
+            <div class="ml-16">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">Smart Language Matching</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Tasks are automatically matched with contributors based on their language background.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Attribution -->
+
+{% endblock %}

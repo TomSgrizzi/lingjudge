@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-50 py-12">
+  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-xl">
+    <!-- Progress Bar -->
+    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+      <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-300" style="width: {{ progress }}%"></div>
+    </div>
+
+    {% if item.context %}
+      <p class="italic mb-4 text-gray-600 text-center">Context: {{ item.context }}</p>
+    {% endif %}
+    <p class="font-bold text-2xl mb-6 text-center">{{ item.sentence }}</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="flex justify-between mb-2 text-sm font-medium text-gray-700">
+        <span>{{ task.left_label }}</span>
+        <span>{{ task.right_label }}</span>
+      </div>
+      <div class="flex justify-between mb-8">
+        {% for i in range %}
+          <label class="flex flex-col items-center cursor-pointer">
+            <input type="radio" name="response" value="{{ i }}" class="accent-blue-600 scale-125 mb-1">
+            <span class="text-xs">{{ i }}</span>
+          </label>
+        {% endfor %}
+      </div>
+      <div class="flex justify-between mt-4">
+        {% if item_index > 0 %}
+          <button name="previous" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded font-semibold shadow transition">Previous</button>
+        {% else %}
+          <span></span>
+        {% endif %}
+        <button name="next" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-semibold shadow transition">Next</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
