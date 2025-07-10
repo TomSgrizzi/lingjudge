@@ -26,10 +26,9 @@ LOGOUT_REDIRECT_URL = 'public_home'  # refers to the name of the public home vie
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8+kfi^h)460k=2x4el_vx%rxisi#)4am(9q4yhsmhan*e+m_hv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = []
 
