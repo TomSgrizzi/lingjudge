@@ -1,0 +1,8 @@
+asgiref==3.9.0
+Django==4.2.23
+django-multiselectfield==1.0.1
+django-tailwind==3.9.1
+django-widget-tweaks==1.5.0
+psycopg2-binary==2.9.10
+sqlparse==0.5.3
+tzdata==2025.2
