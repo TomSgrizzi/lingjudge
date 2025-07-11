@@ -18,7 +18,7 @@ class CustomUserCreationForm(UserCreationForm):
     date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     
     native_languages = forms.ModelMultipleChoiceField(
-        queryset=NativeLanguage.objects.all(),
+        queryset=NativeLanguage.objects.all().order_by('name'),
         widget=forms.SelectMultiple(attrs={'class': 'form-select'}),
         required=True,
         label="Native Language(s)"
