@@ -63,6 +63,9 @@
         <!-- Native Languages -->
         <div class="space-y-2">
           {{ form.native_languages.label_tag }}
+          <p class="text-sm text-gray-500">
+            To select multiple languages, hold down the Ctrl key while clicking on the options.
+          </p>
           {{ form.native_languages|add_class:"mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2" }}
           <p class="text-sm text-gray-500">
             Don’t see your language(s)? <a href="mailto:lingjudge@gmail.com class="text-indigo-600 hover:text-indigo-500 underline">Contact us</a>.

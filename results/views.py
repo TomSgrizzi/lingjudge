@@ -85,9 +85,9 @@ def download_task_results(request, task_id):
 
     writer = csv.writer(response)
     writer.writerow([
-        'task id', 'task type', 'scale points', 'left label', 'right label', 'randomized',
+        'task id', 'task type', 'scale points', 'left label', 'right label', 'randomized', 'item id',
         'item 1', 'item 2', 'context', 'user id', 'native languages',
-        'date of birth', 'task total duration (s)', 'selection'
+        'date of birth', 'task total duration (s)', 'selection', 'completion date'
     ])
 
     if task.task_type == 'Likert':
@@ -103,6 +103,7 @@ def download_task_results(request, task_id):
                 (max(r.end_time for r in user_group) - min(r.start_time for r in user_group)).total_seconds(),
                 2
             )
+            completion_date = max(r.end_time for r in user_group).date()
 
 
             for r in user_group:
@@ -111,10 +112,11 @@ def download_task_results(request, task_id):
                 writer.writerow([
                     task.id, 'Likert', task.num_scale_points, task.left_label, task.right_label,
                     task.randomized,
-                    r.item.sentence, '', r.item.context or '', user.id,
+                    r.item.item_id or r.item.id, r.item.sentence, '', r.item.context or '', user.id,
                     native_langs, user.date_of_birth,
-                    total_duration, r.response
+                    total_duration, r.response, completion_date
                 ])
+
 
     else:  # ForcedChoice
         responses = ForcedChoiceResponse.objects.filter(task=task).select_related('item', 'user')
@@ -129,6 +131,7 @@ def download_task_results(request, task_id):
                 2
             )
 
+            completion_date = max(r.end_time for r in user_group).date()
 
             for r in user_group:
                 user = r.user
@@ -136,9 +139,10 @@ def download_task_results(request, task_id):
                 writer.writerow([
                     task.id, 'ForcedChoice', '', '', '',
                     task.randomized,
-                    r.item.sentence_a, r.item.sentence_b, r.item.context or '', user.id,
+                    r.item.item_id or r.item.id, r.item.sentence_a, r.item.sentence_b, r.item.context or '', user.id,
                     native_langs, user.date_of_birth,
-                    total_duration, r.selection
+                    total_duration, r.selection, completion_date
                 ])
+
 
     return response

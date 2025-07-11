@@ -126,19 +126,20 @@ def add_likert_items(request, task_id):
                 decoded_file = csv_file.read().decode('utf-8')
                 reader = csv.DictReader(io.StringIO(decoded_file))
 
-                required_fields = {'sentence', 'context'}
+                required_fields = {'id', 'sentence', 'context'}
                 if not required_fields.issubset(reader.fieldnames):
-                    messages.error(request, 'CSV file must contain "sentence" and "context" columns.')
+                    messages.error(request, 'CSV file must contain "id", "sentence" and "context" columns.')
                     return redirect('tasks:add_likert_items', task_id=task.id)
 
                 row_count = 0
                 for row in reader:
                     LikertItem.objects.create(
+                        item_id=row.get('id').strip(),
                         task=task,
                         sentence=row.get('sentence', '').strip(),
                         context=row.get('context', '').strip()
                     )
-                    row_count += 1
+
 
                 task.num_items = row_count
                 task.status = 'published'
@@ -200,18 +201,20 @@ def add_fc_items(request, task_id):
                 csv_file = csv_form.cleaned_data['csv_file']
                 decoded_file = csv_file.read().decode('utf-8')
                 reader = csv.DictReader(io.StringIO(decoded_file))
-                required_fields = {'sentence_a', 'sentence_b', 'context'}
+                required_fields = {'id', 'sentence_a', 'sentence_b', 'context'}
                 if not required_fields.issubset(reader.fieldnames):
-                    messages.error(request, 'CSV must contain "sentence_a", "sentence_b", and "context" columns.')
+                    messages.error(request, 'CSV must contain "id", "sentence_a", "sentence_b", and "context" columns.')
                     return redirect('tasks:add_fc_items', task_id=task.id)
                 row_count = 0
                 for row in reader:
                     ForcedChoiceItem.objects.create(
+                        item_id=row.get('id').strip(),
                         task=task,
                         sentence_a=row.get('sentence_a', '').strip(),
                         sentence_b=row.get('sentence_b', '').strip(),
                         context=row.get('context', '').strip()
                     )
+
                     row_count += 1
 
                 task.num_items = row_count

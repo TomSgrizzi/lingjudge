@@ -136,11 +136,13 @@ class Task(models.Model):
 
 class LikertItem(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='likert_items')
+    item_id = models.CharField(max_length=50, blank=True)  # ← NEW: user-defined ID like '1', 'itemA', etc.
     sentence = models.TextField()
     context = models.TextField(blank=True)
 
 class ForcedChoiceItem(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='forced_items')
+    item_id = models.CharField(max_length=50, blank=True)  # ← NEW
     sentence_a = models.TextField()
     sentence_b = models.TextField()
     context = models.TextField(blank=True)
