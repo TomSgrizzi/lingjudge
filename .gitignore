@@ -1,0 +1,24 @@
+# Python bytecode
+*.pyc
+__pycache__/
+
+# SQLite database
+db.sqlite3
+
+# Virtual environments
+env/
+venv/
+
+# Environment variables
+.env
+keys.json
+
+# Logs
+*.log
+
+# Collected static files
+staticfiles/
+
+# OS-specific
+.DS_Store
+Thumbs.db
