@@ -71,7 +71,7 @@ def task_delete(request, task_id):
     task = get_object_or_404(Task, id=task_id, user=request.user)
     if request.method == 'POST':
         task.delete()
-        messages.success(request, 'Task deleted.')
+        #messages.success(request, 'Task deleted.')
         return redirect('my_results')
     return render(request, 'results/task_delete_confirm.html', {'task': task})
 
