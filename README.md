@@ -15,6 +15,7 @@
   - Response metadata
   - Completion timestamps
 - 🔐 Anonymous participation with response tracking
+- 📥 Email notification for new tasks matching your native language(s)
 - ⚙️ Admin dashboard to manage tasks and results
 - 🌐 Deployed with PostgreSQL on **PythonAnywhere**
 - 📨 Email verification and password reset via Brevo
